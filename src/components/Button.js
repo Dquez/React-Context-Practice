@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import LanguageContext from '../contexts/LanguageContext';
+import ColorContext from '../contexts/ColorContext';
 
-class Button extends Component{
-    static contextType = LanguageContext;
-    renderLanguage = () =>{
-        switch(this.context){
+class Button extends Component{ 
+    renderLanguage = language =>{
+        switch(language){
             case 'Italian':
                 return 'Invio';
             case 'Portuguese':
@@ -15,9 +15,20 @@ class Button extends Component{
                 return 'English';
         }
     }
+    renderButton = color => {
+        return(
+            <button className={`ui button ${color}`}>
+                            <LanguageContext.Consumer>
+                                {contextVal=> this.renderLanguage(contextVal)}
+                            </LanguageContext.Consumer>
+            </button>
+        )
+    }
     render(){
         return (
-            <button className='ui button primary'>{this.renderLanguage()}</button>
+                <ColorContext.Consumer>
+                    {color=> this.renderButton(color)}
+                </ColorContext.Consumer>   
         )
     }
 }
