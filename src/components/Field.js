@@ -5,7 +5,7 @@ class Field extends Component {
     static contextType = LanguageContext;
 
     renderLabelText = () =>{
-        switch(this.context){
+        switch(this.context.language){
             case 'Italian':
                 return 'Nome';
             case 'Portuguese':
